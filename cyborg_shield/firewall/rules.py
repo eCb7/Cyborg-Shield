@@ -3,9 +3,9 @@ from __future__ import annotations
 
 import ipaddress
 import json
-import re
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, asdict
 from enum import Enum
+from functools import lru_cache
 from pathlib import Path
 from typing import Optional
 
@@ -47,27 +47,17 @@ class Rule:
     def matches(self, packet: "Packet") -> bool:
         if not self.enabled:
             return False
-        if str(self.chain) != str(packet.chain):
+        if self.chain != packet.chain:
             return False
-        if self.protocol != Protocol.ANY and str(self.protocol) != str(packet.protocol):
+        if self.protocol != Protocol.ANY and self.protocol != packet.protocol:
             return False
-        if not self._match_addr(self.src, packet.src):
+        if not _match_addr(self.src, packet.src):
             return False
-        if not self._match_addr(self.dst, packet.dst):
+        if not _match_addr(self.dst, packet.dst):
             return False
         if self.port is not None and self.port != packet.port:
             return False
         return True
-
-    @staticmethod
-    def _match_addr(pattern: str, address: str) -> bool:
-        if pattern in ("any", "*", ""):
-            return True
-        try:
-            net = ipaddress.ip_network(pattern, strict=False)
-            return ipaddress.ip_address(address) in net
-        except ValueError:
-            return pattern == address
 
     # ------------------------------------------------------------------
     def to_dict(self) -> dict:
@@ -91,6 +81,20 @@ class Rule:
             hits=d.get("hits", 0),
             comment=d.get("comment", ""),
         )
+
+
+@lru_cache(maxsize=512)
+def _parse_network(pattern: str):
+    return ipaddress.ip_network(pattern, strict=False)
+
+
+def _match_addr(pattern: str, address: str) -> bool:
+    if pattern in ("any", "*", ""):
+        return True
+    try:
+        return ipaddress.ip_address(address) in _parse_network(pattern)
+    except ValueError:
+        return pattern == address
 
 
 @dataclass

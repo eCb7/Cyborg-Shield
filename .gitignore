@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.eggs/
+*.egg-info/
+dist/
+build/
+.env
+.venv/
+venv/
+
+# Logs générés à l'exécution
+logs/*.csv
+logs/*.jsonl
+logs/*.log
+
+# Règles runtime (générées par l'appli, pas le dépôt)
+config/rules.json

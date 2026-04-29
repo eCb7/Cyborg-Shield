@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "chain": "INPUT",
+    "protocol": "tcp",
+    "src": "any",
+    "dst": "any",
+    "port": 22,
+    "action": "ALLOW",
+    "enabled": true,
+    "hits": 0,
+    "comment": "SSH autoris\u00e9"
+  },
+  {
+    "id": 2,
+    "chain": "INPUT",
+    "protocol": "tcp",
+    "src": "any",
+    "dst": "any",
+    "port": 23,
+    "action": "DROP",
+    "enabled": true,
+    "hits": 0,
+    "comment": "Telnet bloqu\u00e9"
+  },
+  {
+    "id": 3,
+    "chain": "INPUT",
+    "protocol": "tcp",
+    "src": "any",
+    "dst": "any",
+    "port": 3389,
+    "action": "DROP",
+    "enabled": true,
+    "hits": 0,
+    "comment": "RDP bloqu\u00e9"
+  }
+]

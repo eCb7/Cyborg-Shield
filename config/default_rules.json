@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "chain": "INPUT",
+    "protocol": "tcp",
+    "src": "any",
+    "dst": "any",
+    "port": 22,
+    "action": "ALLOW",
+    "enabled": true,
+    "hits": 0,
+    "comment": "SSH admin"
+  },
+  {
+    "id": 2,
+    "chain": "INPUT",
+    "protocol": "tcp",
+    "src": "any",
+    "dst": "any",
+    "port": 80,
+    "action": "ALLOW",
+    "enabled": true,
+    "hits": 0,
+    "comment": "HTTP"
+  },
+  {
+    "id": 3,
+    "chain": "INPUT",
+    "protocol": "tcp",
+    "src": "any",
+    "dst": "any",
+    "port": 443,
+    "action": "ALLOW",
+    "enabled": true,
+    "hits": 0,
+    "comment": "HTTPS"
+  },
+  {
+    "id": 4,
+    "chain": "INPUT",
+    "protocol": "tcp",
+    "src": "any",
+    "dst": "any",
+    "port": 23,
+    "action": "DROP",
+    "enabled": true,
+    "hits": 0,
+    "comment": "Bloquer Telnet"
+  },
+  {
+    "id": 5,
+    "chain": "INPUT",
+    "protocol": "tcp",
+    "src": "any",
+    "dst": "any",
+    "port": 445,
+    "action": "DROP",
+    "enabled": true,
+    "hits": 0,
+    "comment": "Bloquer SMB"
+  },
+  {
+    "id": 6,
+    "chain": "INPUT",
+    "protocol": "tcp",
+    "src": "any",
+    "dst": "any",
+    "port": 3389,
+    "action": "DROP",
+    "enabled": true,
+    "hits": 0,
+    "comment": "Bloquer RDP"
+  }
+]

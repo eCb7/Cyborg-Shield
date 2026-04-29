@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "cyborg-shield"
+version = "1.0.0"
+description = "Le Bouclier Cyborg — pare-feu pédagogique (Teen Titans)"
+requires-python = ">=3.10"
+dependencies = ["click>=8.1", "rich>=13.0"]
+
+[project.scripts]
+cyborg-shield = "cyborg_shield.main:cli"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
